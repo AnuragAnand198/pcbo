@@ -12,7 +12,7 @@
   
   const dbRef = firebase.database().ref("random");
   dbRef.on("value", (snapshot) => {
-    document.getElementById("random").innerText = snapshot.val();
+    document.getElementById("display").innerText = snapshot.val();
   });
 </script>
 
