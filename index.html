@@ -14,11 +14,11 @@
   
   firebase.initializeApp(firebaseConfig);
   
-  const dbRef = firebase.database().ref("https://pcbo-92920-default-rtdb.firebaseio.com/display");
+  const dbRef = firebase.database().ref("display");
   dbRef.on("value", (snapshot) => {
     document.getElementById("display").innerText = snapshot.val();
   });
 </script>
 
 <h1>Device Display:</h1>
-<div id="display" style="font-size: 40px;"></div>
+<div id="display" style="font-size: 400px;"></div>
