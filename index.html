@@ -3,11 +3,15 @@
 
 <script>
   const firebaseConfig = {
-    apiKey: "AIzaSyDXrGg-15fx3x8NwG8N3DJBxb4_G_fUeTE",
-    authDomain: "pcbo-92920.firebaseapp.com",
-    databaseURL: "https://pcbo-92920-default-rtdb.firebaseio.com/",
-    projectId: "pcbo-92920"
-  };
+  apiKey: "AIzaSyDXrGg-15fx3x8NwG8N3DJBxb4_G_fUeTE",
+  authDomain: "pcbo-92920.firebaseapp.com",
+  projectId: "pcbo-92920",
+  storageBucket: "pcbo-92920.firebasestorage.app",
+  messagingSenderId: "360950391844",
+  appId: "1:360950391844:web:00ea1f1d1324ced109e4b1",
+  databaseURL: "https://pcbo-92920-default-rtdb.firebaseio.com/",
+};
+  
   firebase.initializeApp(firebaseConfig);
   
   const dbRef = firebase.database().ref("random");
