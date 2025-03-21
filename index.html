@@ -14,9 +14,9 @@
   
   firebase.initializeApp(firebaseConfig);
   
-  const dbRef = firebase.database().ref("random");
+  const dbRef = firebase.database().ref("display");
   dbRef.on("value", (snapshot) => {
-    document.getElementById("random").innerText = snapshot.val();
+    document.getElementById("display").innerText = snapshot.val();
   });
 </script>
 
