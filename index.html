@@ -10,7 +10,7 @@
   };
   firebase.initializeApp(firebaseConfig);
   
-  const dbRef = firebase.database().ref("device/displayValue");
+  const dbRef = firebase.database().ref("random");
   dbRef.on("value", (snapshot) => {
     document.getElementById("random").innerText = snapshot.val();
   });
