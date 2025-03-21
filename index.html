@@ -1,24 +1,81 @@
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Database Display</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .data-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        .data-item {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-<script>
-  const firebaseConfig = {
-  apiKey: "AIzaSyDXrGg-15fx3x8NwG8N3DJBxb4_G_fUeTE",
-  authDomain: "pcbo-92920.firebaseapp.com",
-  projectId: "pcbo-92920",
-  storageBucket: "pcbo-92920.firebasestorage.app",
-  messagingSenderId: "360950391844",
-  appId: "1:360950391844:web:00ea1f1d1324ced109e4b1",
-  databaseURL: "https://pcbo-92920-default-rtdb.firebaseio.com/",
-};
-  
-  firebase.initializeApp(firebaseConfig);
-  
-  const dbRef = firebase.database().ref("display");
-  dbRef.on("value", (snapshot) => {
-    document.getElementById("display").innerText = snapshot.val();
-  });
-</script>
+    <h1>Firebase Realtime Data</h1>
+    <div class="data-container">
+        <div class="data-item"><span class="label">Display Value:</span> <span id="displayValue">Loading...</span></div>
+        <div class="data-item"><span class="label">Temperature:</span> <span id="temperature">Loading...</span></div>
+        <div class="data-item"><span class="label">Status:</span> <span id="status">Loading...</span></div>
+    </div>
 
-<h3>Device Display:</h3>
-<div id="display" style="font-size: 400px;"></div>
+    <script>
+        // Replace with your Firebase configuration
+        const firebaseConfig = {
+          
+          apiKey: "AIzaSyDXrGg-15fx3x8NwG8N3DJBxb4_G_fUeTE",
+          authDomain: "pcbo-92920.firebaseapp.com",
+          projectId: "pcbo-92920",
+          storageBucket: "pcbo-92920.firebasestorage.app",
+          messagingSenderId: "360950391844",
+          appId: "1:360950391844:web:00ea1f1d1324ced109e4b1",
+          databaseURL: "https://pcbo-92920-default-rtdb.firebaseio.com/",
+          };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Reference to the database path
+        const dbRef = firebase.database().ref("device");
+
+        // Listen for value changes
+        dbRef.on("value", (snapshot) => {
+            if (snapshot.exists()) {
+                let data = snapshot.val();
+                document.getElementById("displayValue").innerText = data.displayValue || "N/A";
+                document.getElementById("temperature").innerText = data.temperature || "N/A";
+                document.getElementById("status").innerText = data.status || "N/A";
+            } else {
+                document.getElementById("displayValue").innerText = "No Data";
+                document.getElementById("temperature").innerText = "No Data";
+                document.getElementById("status").innerText = "No Data";
+            }
+        }, (error) => {
+            console.error("Firebase read failed: ", error);
+        });
+    </script>
+
+</body>
+</html>
